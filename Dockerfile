@@ -17,18 +17,22 @@ COPY composer.json composer.lock ./
 # Install dependencies (vendor)
 RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
 
-# Copy project (kecuali yang ada di .dockerignore)
+# Copy project
 COPY . .
 
-# Jalankan autoload dump setelah source dicopy
+# Generate autoload
 RUN composer dump-autoload --optimize
 
-# Set permission storage, bootstrap, exports, dan logs
-RUN chown -R www-data:www-data storage bootstrap/cache \
-    && chown -R www-data:www-data storage/app/exports \
-    && chown -R www-data:www-data storage/logs \
-    && chmod -R 775 storage/app/exports \
-    && chmod -R 775 storage/logs
+# ✅ FIX: pastikan semua folder ada dulu
+RUN mkdir -p \
+    storage/framework/cache \
+    storage/framework/sessions \
+    storage/framework/views \
+    storage/logs \
+    storage/app/exports \
+    bootstrap/cache \
+    && chown -R www-data:www-data storage bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
 # Default command
 CMD ["php-fpm"]
