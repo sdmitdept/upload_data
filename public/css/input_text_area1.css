@@ -1,0 +1,41 @@
+textarea {
+    width: 90%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    transition: all 0.3s ease-in-out;
+}
+
+textarea:hover {
+    border-color: #888;
+}
+
+textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+textarea {
+    background-color: #f9f9f9;
+}
+
+textarea::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+@media (prefers-color-scheme: dark) {
+    textarea {
+        background-color: #F0FFFF;
+        color: #000;
+        border-color: #D3D3D3;
+    }
+
+    textarea::placeholder {
+        color: #bbb;
+    }
+}
